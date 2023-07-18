@@ -3,8 +3,10 @@ import {StyleSheet} from 'react-native';
 import {
   ViroARScene,
   ViroText,
-  ViroConstants,
-  ViroARSceneNavigator,
+  ViroTrackingStateConstants,
+  ViroVRSceneNavigator,
+  Viro360Image,
+  ViroScene
 } from '@viro-community/react-viro';
 
 const HelloWorldSceneAR = () => {
@@ -12,28 +14,41 @@ const HelloWorldSceneAR = () => {
 
   function onInitialized(state, reason) {
     console.log('guncelleme', state, reason);
-    if (state === ViroConstants.TRACKING_NORMAL) {
+    if (state === ViroTrackingStateConstants.TRACKING_NORMAL) {
       setText('Hello World!');
-    } else if (state === ViroConstants.TRACKING_NONE) {
+    } else if (state === ViroTrackingStateConstants.TRACKING_UNAVAILABLE) {
       // Handle loss of tracking
     }
   }
 
   return (
-    <ViroARScene onTrackingUpdated={onInitialized}>
-      <ViroText
-        text={text}
-        scale={[0.5, 0.5, 0.5]}
-        position={[0, 0, -1]}
-        style={styles.helloWorldTextStyle}
-      />
-    </ViroARScene>
+    <ViroScene style={styles.container}>
+        <Viro360Image source={require("./assets/wallpaperflare.com_wallpaper.jpg")}/>
+      </ViroScene>
+
+    // <Viro360Image
+    //     source={require("./assets/wallpaperflare.com_wallpaper.jpg")}
+    //     rotation={[0, 45, 0]}
+    //     format="RGBA8"
+    //     onLoadStart={handleLoadStart}
+    //     onLoadEnd={handleLoadEnd}
+    //     onError={handleError}
+    //   />
+    // <ViroARScene onTrackingUpdated={onInitialized}>
+      
+    //   <ViroText
+    //     text={text}
+    //     scale={[0.5, 0.5, 0.5]}
+    //     position={[0, 0, -1]}
+    //     style={styles.helloWorldTextStyle}
+    //   />
+    // </ViroARScene>
   );
 };
 
 export default () => {
   return (
-    <ViroARSceneNavigator
+    <ViroVRSceneNavigator
       autofocus={true}
       initialScene={{
         scene: HelloWorldSceneAR,
