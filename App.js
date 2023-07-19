@@ -5,6 +5,7 @@ import {
   ViroText,
   ViroTrackingStateConstants,
   ViroVRSceneNavigator,
+  ViroARSceneNavigator,
   Viro360Image,
   ViroScene
 } from '@viro-community/react-viro';
@@ -22,9 +23,9 @@ const HelloWorldSceneAR = () => {
   }
 
   return (
-    <ViroScene style={styles.container}>
-        <Viro360Image source={require("./assets/wallpaperflare.com_wallpaper.jpg")}/>
-      </ViroScene>
+    // <ViroScene style={styles.container}>
+    //     
+    //   </ViroScene>
 
     // <Viro360Image
     //     source={require("./assets/wallpaperflare.com_wallpaper.jpg")}
@@ -34,21 +35,21 @@ const HelloWorldSceneAR = () => {
     //     onLoadEnd={handleLoadEnd}
     //     onError={handleError}
     //   />
-    // <ViroARScene onTrackingUpdated={onInitialized}>
-      
-    //   <ViroText
-    //     text={text}
-    //     scale={[0.5, 0.5, 0.5]}
-    //     position={[0, 0, -1]}
-    //     style={styles.helloWorldTextStyle}
-    //   />
-    // </ViroARScene>
+    <ViroARScene onTrackingUpdated={onInitialized}>
+      <Viro360Image source={require("./assets/wallpaperflare.com_wallpaper.jpg")}/>
+      {/* <ViroText
+        text={text}
+        scale={[0.5, 0.5, 0.5]}
+        position={[0, 0, -1]}
+        style={styles.helloWorldTextStyle}
+      /> */}
+    </ViroARScene>
   );
 };
 
 export default () => {
   return (
-    <ViroVRSceneNavigator
+    <ViroARSceneNavigator
       autofocus={true}
       initialScene={{
         scene: HelloWorldSceneAR,
